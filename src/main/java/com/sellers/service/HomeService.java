@@ -1,11 +1,11 @@
 package com.sellers.service;
 
-import com.sellers.entity.UserVo;
+import com.sellers.entity.User;
 
 public interface HomeService {
 
-	boolean loginUser(UserVo userVo);
+	boolean loginUser(User userVo);
 
-	UserVo saveUser(UserVo userVo);
+	User saveUser(User userVo);
 
 }

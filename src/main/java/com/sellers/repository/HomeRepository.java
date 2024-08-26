@@ -2,10 +2,10 @@ package com.sellers.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.sellers.entity.UserVo;
+import com.sellers.entity.User;
 
-public interface HomeRepository  extends JpaRepository<UserVo,Integer> {
+public interface HomeRepository  extends JpaRepository<User,Integer> {
 
-	UserVo findByUsername(String username);
+	User findByUsername(String username);
 
 }

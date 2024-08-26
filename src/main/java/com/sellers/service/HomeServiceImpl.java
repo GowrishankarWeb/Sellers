@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sellers.entity.UserVo;
+import com.sellers.entity.User;
 import com.sellers.repository.HomeRepository;
 
 @Service
@@ -15,9 +15,9 @@ public class HomeServiceImpl implements HomeService {
 	private HomeRepository homeRepository;
 
 	@Override
-	public boolean loginUser(UserVo userVo) {
+	public boolean loginUser(User userVo) {
 		try {
-			UserVo user=homeRepository.findByUsername(userVo.getUsername());
+			User user=homeRepository.findByUsername(userVo.getUsername());
 			if((user.getUsername().equals(userVo.getUsername())) && (user.getPassword().equals(userVo.getPassword()))) {
 				return true;
 			}
@@ -28,9 +28,9 @@ public class HomeServiceImpl implements HomeService {
 	}
 
 	@Override
-	public UserVo saveUser(UserVo userVo) {
+	public User saveUser(User user) {
 		try {
-			return homeRepository.save(userVo);
+			return homeRepository.save(user);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
