@@ -43,23 +43,6 @@ public class HomeController {
 		}
 	}
 	
-	@PostMapping("/createUser")
-	public ResponseEntity<Integer> createUser(@RequestBody User user, BindingResult result){
-		User userInserted=null;
-		try {
-			userInserted=homeService.saveUser(user);
-			if(userInserted.getId()>0) {
-				return new ResponseEntity<Integer>(userInserted.getId(), HttpStatus.OK);
-			}
-			else {
-				return new ResponseEntity<Integer>(0, HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<Integer>(-1, HttpStatus.INTERNAL_SERVER_ERROR);
-		} 
-	}
-	
 	@GetMapping("/getAllSellers")
 	public ResponseEntity<?> getAllSellers(){
 		List<Seller> sellersList = new ArrayList<>();
