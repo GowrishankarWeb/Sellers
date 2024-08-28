@@ -4,8 +4,6 @@ import com.sellers.entity.User;
 
 public interface HomeService {
 
-	boolean loginUser(User userVo);
-
-	User saveUser(User userVo);
+	User loginUser(User userVo);
 
 }

@@ -15,25 +15,15 @@ public class HomeServiceImpl implements HomeService {
 	private HomeRepository homeRepository;
 
 	@Override
-	public boolean loginUser(User userVo) {
+	public User loginUser(User userVo) {
 		try {
 			if((userVo.getUsername().equals("admin")) && (userVo.getPassword().equals("admin"))) {
-				return true;
+				return userVo;
 			}
 			User user=homeRepository.findByUsername(userVo.getUsername());
 			if((user.getUsername().equals(userVo.getUsername())) && (user.getPassword().equals(userVo.getPassword()))) {
-				return true;
+				return user;
 			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	@Override
-	public User saveUser(User user) {
-		try {
-			return homeRepository.save(user);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

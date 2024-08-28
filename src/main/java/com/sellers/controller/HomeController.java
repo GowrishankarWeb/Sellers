@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import com.sellers.repository.SellerRepository;
 import com.sellers.service.HomeService;
 
 @RestController
+@CrossOrigin(origins="http://localhost:5000/")
 public class HomeController {
 	
 	@Autowired
@@ -27,19 +29,19 @@ public class HomeController {
 	private SellerRepository sellerRepository;
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> loginUser(@RequestBody User user, BindingResult result){
-		boolean loggedIn=false;
+	public ResponseEntity<User> loginUser(@RequestBody User user, BindingResult result){
+		User loggedInUser=null;
 		try {
-			loggedIn=homeService.loginUser(user);
-			if(loggedIn) {
-				return new ResponseEntity<String>("Logged In Successfully", HttpStatus.OK);
+			loggedInUser=homeService.loginUser(user);
+			if(loggedInUser!=null) {
+				return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
 			}
 			else {
-				return new ResponseEntity<String>("Invalid username or password", HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("An error occured", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -55,6 +57,5 @@ public class HomeController {
 		}
 		return ResponseEntity.ok(sellersList);
 	}
-	
 	
 }
